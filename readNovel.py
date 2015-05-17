@@ -69,6 +69,7 @@ class readNovel:
             # if two lines is \n, change line
             if oldText == "\n" and text == "\n":
                 string = self.checkString(string)
+                string = string.lower()
                 outFile.write(string+"\n")
                 string = ""
 
@@ -221,16 +222,66 @@ class readNovel:
                 map.setdefault(mapElement[0],int(mapElement[1]))
         return map
 
+    def word2VectorIndex(self,mapFileName,trainOutFileName,trainIndexFileName):
+        map = self.loadWord2VectorMap(mapFileName)
+
+        inFile = open(trainOutFileName,"r")
+        outFile = open(trainIndexFileName,"w")
+
+        j=0
+        while 1:
+            # if j > 5:
+            #     break
+            # j = j +1
+
+            text = inFile.readline()
+            string = ""
+            if len(text)<2:
+                break
+            else:
+                text = text[:-1]
+                data = text.split(",")
+
+                for i in range(0,len(data)):
+                    if i == 0:
+                        data[i] = -2
+                    elif i == len(data)-1:
+                        data[i] = -3
+                    else:
+                        if data[i] in map:
+                            data[i] = map[data[i]]
+                        else:
+                            data[i] = -1
+                    string = string+str(data[i])+","
+                string = string[:-1]
+                outFile.write(string)
+
+
+
+
+        inFile.close()
+        outFile.close()
+
+        return "word2vector index ok"
+
     def loadWord2VectorMap(self,mapFileName):
         mapFile = open(mapFileName,"r")
+        set = []
+
         i = 0
         while 1:
             text = mapFile.readline()
             if len(text)<1:
                 break
             else:
-                print(text)
+                text = text[:-1]
+                element = text.split(" ")
+                element[1] = int(element[1])
+                set.append(element)
 
-            if i > 10:
-                break
-            i=i+1
+            # if i > 10:
+            #     break
+            # i=i+1
+        # print(set)
+        map = dict(set)
+        return map
