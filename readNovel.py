@@ -81,6 +81,7 @@ class readNovel:
                     else:
 
                         string = self.checkString(string)
+                        string = string.lower()
                         outFile.write(string+"\n")
                         string = ""
             oldText = text
@@ -93,6 +94,7 @@ class readNovel:
         self.useless.close()
         self.file.close()
         return True
+
     def checkString(self,string):
 
 
@@ -219,4 +221,16 @@ class readNovel:
                 map.setdefault(mapElement[0],int(mapElement[1]))
         return map
 
+    def loadWord2VectorMap(self,mapFileName):
+        mapFile = open(mapFileName,"r")
+        i = 0
+        while 1:
+            text = mapFile.readline()
+            if len(text)<1:
+                break
+            else:
+                print(text)
 
+            if i > 10:
+                break
+            i=i+1
