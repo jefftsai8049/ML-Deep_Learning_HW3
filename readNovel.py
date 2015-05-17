@@ -254,7 +254,7 @@ class readNovel:
                             data[i] = -1
                     string = string+str(data[i])+","
                 string = string[:-1]
-                outFile.write(string)
+                outFile.write(string+"\n")
 
 
 

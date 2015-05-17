@@ -9,4 +9,4 @@ novel = readNovel.readNovel()
 
 # print(novel.word2index("train_data/training_out.csv","train_data/training_index.csv","train_data/train_map.csv"))
 
-print(novel.word2VectorIndex("train_data/word2vec/word2vec_map_500.txt","train_data/training_out.csv","train_data/training_index_word2vec500.csv"))
+print(novel.word2VectorIndex("train_data/word2vec/word2vec_map_100.txt","train_data/training_out.csv","train_data/training_index_word2vec100.csv"))
