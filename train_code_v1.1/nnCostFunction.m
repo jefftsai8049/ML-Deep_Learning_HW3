@@ -7,7 +7,7 @@ function [J grad] = nnCostFunction(nn_params, ...
 %   The returned parameter grad should be a "unrolled" vector of the
 %   partial derivatives of the neural network.
 %
-
+tic;
 % Reshape nn_params back into the parameters, the weight matrices for RNN
 current_index = 1;
 current_size = hidden_layer_size * input_layer_size;   %  128 x 69
@@ -86,7 +86,7 @@ for cur_word = 1 : (number_of_words - 1)    % current word
        
         J = J + cur_word_cost; % accumulate the cost
 end
-
+toc;
 % Part 2: Back prop. according to the current step.
 
 %============ Unfold a part of the RNN===================
@@ -166,5 +166,5 @@ regterm_b_out = lambda/number_of_words * b_out;
 % Unroll gradients
 grad = [W_1_grad(:) ; b_1_grad(:) ;W_m_grad(:) ; b_m_grad(:) ; W_out_grad(:) ; b_out_grad(:)];
 
-
+% toc;
 end

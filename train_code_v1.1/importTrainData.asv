@@ -1,0 +1,29 @@
+function data = importTrainData(file,endRow)
+
+    %150955399 lines
+    
+%     data = cell(endRow,1);
+
+    text ='';
+    if ftell(file)<endRow+1
+        text = fgetl(file)
+        fprintf('test')
+    end
+    
+    data = text;
+%     while i < endRow+1
+%     % endCount=3;
+%     % for i=1:endCount
+%         text = fgetl(file);
+%         strVec = strsplit(text,',');
+%         mat = str2double(strVec);
+%         data(i) = mat2cell(mat);
+%         progress = i/endRow*100;
+%         fprintf('Load Training Data Progress : %.2f% \n',progress)
+%         i = i + 1;
+% 
+%     end
+
+end
+
+

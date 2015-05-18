@@ -55,7 +55,7 @@ number_of_words = size(data, 2);     % take first sentence as example
 index = data + 4;
 word_pos = [1:size(index,2)];
 sparse_whole_sentence = sparse(index,word_pos,1,vector_size, number_of_words);
-% whole_sentence = full(sparse_whole_sentence);
+whole_sentence = full(sparse_whole_sentence);
 
 X = sparse_whole_sentence(:, 1:number_of_words-1);
 y = sparse_whole_sentence(:, 2:end);
@@ -96,7 +96,7 @@ sum_of_gradients = zeros(size(nn_params, 1), 1);   % Adagrad parameter
 
 for epoch = 1:1
         for current_sentence = 1 : number_of_sentences
-                
+                tic;
                 data = importTrainData(file);  %update train data
                 number_of_words = size(data, 2);     % number of words the current sentence has 
                 if number_of_words < 1
@@ -109,10 +109,9 @@ for epoch = 1:1
                 sparse_whole_sentence = sparse(index,word_pos,1,vector_size, number_of_words);
                 whole_sentence = full(sparse_whole_sentence);
 
-%                 X = whole_sentence(:, 1:number_of_words-1);
-%                 y = whole_sentence(:, 2:end);
-                X = sparse_whole_sentence(:, 1:number_of_words-1);
-                y = sparse_whole_sentence(:, 2:end);
+                X = whole_sentence(:, 1:number_of_words-1);
+                y = whole_sentence(:, 2:end);
+
                 if number_of_words <= 3         % if number_of_words <= 3 , backprop. is impossible
                     continue;          
                 end
@@ -139,7 +138,7 @@ for epoch = 1:1
                              ], sum(sum(grad)));
                  fprintf(['Cost : %f '...
                              '\n\n'], J);
-                
+                toc;
         end
         yita = decay * yita;
 end
