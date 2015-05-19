@@ -27,6 +27,15 @@ class readNovel:
         # print(i)
         return i+1
 
+    def findLines(self,inFileName):
+        file = open(inFileName,"r")
+        i=0
+        while 1:
+            text = file.readline()
+            if len(text) < 1:
+                break
+            i = i+1
+        return i
     def readSplit(self ,inFileName, outFileName, useless):
         self.file = open(inFileName, "r", errors='ignore')
         # for save ignore text
